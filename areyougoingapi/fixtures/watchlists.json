@@ -1,0 +1,11 @@
+[
+    {
+        "model": "areyougoingapi.watchlist",
+        "pk": 1,
+        "fields": {
+            "goer": 1,
+            "watched_user": null,
+            "watch": false            
+        }
+    }
+]
