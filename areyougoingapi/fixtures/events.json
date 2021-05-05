@@ -1,0 +1,13 @@
+[
+    {
+        "model": "areyougoingapi.event",
+        "pk": 1,
+        "fields": {
+            "goer": 1,
+            "name": "Poitra Boys",
+            "location": "Tomahawk",
+            "startDate": "2021-06-16T22:00:28+00:00",
+            "details": "Jigging and two stepping"
+        }
+    }
+]

@@ -1,0 +1,9 @@
+[
+    {
+        "model": "areyougoingapi.goer",
+        "pk": 1,
+        "fields": {
+            "user": 1            
+        }
+    }
+]
