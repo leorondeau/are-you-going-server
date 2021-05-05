@@ -7,5 +7,6 @@
             "database": "db.sqlite3",
             "name": "areyougoing"
         }
-    ]
+    ],
+    "python.pythonPath": "/Users/admin/.local/share/virtualenvs/are-you-going-server-Gt0RrgQ9/bin/python"
 }
