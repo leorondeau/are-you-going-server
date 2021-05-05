@@ -1,0 +1,10 @@
+[
+    {
+        "model": "areyougoingapi.usersevents",
+        "pk": 1,
+        "fields": {
+            "goer": 1,
+            "event": 1            
+        }
+    }
+]
