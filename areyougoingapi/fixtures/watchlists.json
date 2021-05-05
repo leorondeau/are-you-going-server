@@ -4,7 +4,7 @@
         "pk": 1,
         "fields": {
             "goer": 1,
-            "watched_user": null,
+            "watched_user": 1,
             "watch": false            
         }
     }
