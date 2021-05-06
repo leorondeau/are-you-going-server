@@ -11,6 +11,24 @@ from areyougoingapi.models import Event
 from areyougoingapi.models import Goer
 
 class Events(ViewSet):
+    def create(self, request):
+
+        goer = Goer.objects.get(user=request.auth.user)
+
+        event = Event()
+        event.name = request.data["name"]
+        event.location = request.data["location"]
+        event.startDate = request.data["startDate"]
+        event.details = request.data["details"]
+        event.goer = goer
+
+        try:
+            event.save()
+            serializer = EventSerializer(event, context={'request': request})
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        except ValidationError as ex:
+            return Response({"reason": ex.message}, status=status.HTTP_400_BAD_REQUEST)
+
 
     def list(self, request):
 
@@ -29,7 +47,7 @@ class EventUserSerializer(serializers.ModelSerializer):
 
 class EventGoerSerializer(serializers.ModelSerializer):
     user = EventUserSerializer(many=False)
-    
+
     class Meta:
         model = Goer
         fields = ['user']
