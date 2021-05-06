@@ -28,12 +28,16 @@ class EventUserSerializer(serializers.ModelSerializer):
         fields = ['username']
 
 class EventGoerSerializer(serializers.ModelSerializer):
+    user = EventUserSerializer(many=False)
+    
     class Meta:
         model = Goer
         fields = ['user']
 
-class EventSerializer(serializers.HyperLinkedModelSerializer):
+class EventSerializer(serializers.HyperlinkedModelSerializer):
 
+    goer = EventGoerSerializer(many=False)
+    
     class Meta:
         model = Event
         url = serializers.HyperlinkedIdentityField(
