@@ -51,7 +51,8 @@ class Events(ViewSet):
         event.details = request.data["details"]
 
         event.goer = Goer.objects.get(user=request.auth.user)
-        
+
+        event.save()
 
 
     def destroy(self, request, pk=None):
