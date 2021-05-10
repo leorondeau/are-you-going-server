@@ -54,6 +54,8 @@ class Events(ViewSet):
 
         event.save()
 
+        return Response({}, status=status.HTTP_204_NO_CONTENT)
+
 
     def destroy(self, request, pk=None):
         """Handle DELETE requests for a single game
