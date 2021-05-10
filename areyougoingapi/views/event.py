@@ -42,6 +42,21 @@ class Events(ViewSet):
         except Exception as ex:
             return HttpResponseServerError(ex)
 
+    def update(self, request, pk=None):
+
+        event = Event.objects.get(pk=pk)
+        event.name = request.data["name"]
+        event.location = request.data["location"]
+        event.startDate = request.data["startDate"]
+        event.details = request.data["details"]
+
+        event.goer = Goer.objects.get(user=request.auth.user)
+
+        event.save()
+
+        return Response({}, status=status.HTTP_204_NO_CONTENT)
+
+
     def destroy(self, request, pk=None):
         """Handle DELETE requests for a single game
 
