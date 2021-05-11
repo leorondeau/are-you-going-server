@@ -22,6 +22,8 @@ class Profile(ViewSet):
         profile["goer"] = goer.data
         profile["events"] = events.data
 
+        return Response(profile)
+
 class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -35,11 +37,11 @@ class GoerSerializer(serializers.ModelSerializer):
         fields = ['user']
 
 class EventSerializer(serializers.ModelSerializer):
-    goer = GoerSerializer(many=False)
+    # goer = GoerSerializer(many=False)
 
     class Meta:
         model = Event
-        fields = ['id', 'goer' , 'name', 'location', 'startDate', 'details']
+        fields = ['id', 'name', 'location', 'startDate', 'details']
 
-        
+
     
