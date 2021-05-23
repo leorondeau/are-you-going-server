@@ -73,7 +73,7 @@ def register_user(request):
     data = json.dumps({"token": token.key})
     return HttpResponse(data, content_type='application/json')
 
-
+@csrf_exempt
 def del_user(username):    
     try:
         u = User.objects.get(username = username)
