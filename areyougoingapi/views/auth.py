@@ -1,10 +1,13 @@
 import json
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
+from rest_framework.response import Response
+from rest_framework import status
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from django.views.decorators.csrf import csrf_exempt
 from areyougoingapi.models import Goer
+
 
 
 @csrf_exempt
@@ -71,19 +74,14 @@ def register_user(request):
     return HttpResponse(data, content_type='application/json')
 
 
-def destroy(self, request, pk=None):
-    """Handle DELETE requests for a single game
-
-    Returns:
-        Response -- 200, 404, or 500 status code
-    """
+def del_user(username):    
     try:
-        event = Event.objects.get(pk=pk)
-        event.delete()
+        u = User.objects.get(username = username)
+        u.delete()
+        
+        return Response({'message': 'Account has been deleted'}, status=status.HTTP_204_NO_CONTENT)
 
-        return Response({}, status=status.HTTP_204_NO_CONTENT)
-
-    except Event.DoesNotExist as ex:
+    except User.DoesNotExist as ex:
         return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
 
     except Exception as ex:
