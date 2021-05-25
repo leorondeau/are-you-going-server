@@ -74,7 +74,7 @@ def register_user(request):
     return HttpResponse(data, content_type='application/json')
 
 @csrf_exempt
-def del_user(username):    
+def del_user(self, username):    
     try:
         u = User.objects.get(username = username)
         u.delete()
