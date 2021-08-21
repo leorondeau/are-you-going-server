@@ -1,10 +1,13 @@
 import json
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
+from rest_framework.response import Response
+from rest_framework import status
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from django.views.decorators.csrf import csrf_exempt
 from areyougoingapi.models import Goer
+
 
 
 @csrf_exempt
@@ -57,19 +60,29 @@ def register_user(request):
         first_name=req_body['first_name'],
         last_name=req_body['last_name']
     )
-
-    # Now save the extra info in the levelupapi_gamer table
-    gamer = Goer.objects.create(
-        bio=req_body['bio'],
+    
+    goer = Goer.objects.create(
         user=new_user
     )
 
-    # Commit the user to the database by saving it
-    gamer.save()
-
+    goer.save()
     # Use the REST Framework's token generator on the new user account
     token = Token.objects.create(user=new_user)
 
     # Return the token to the client
     data = json.dumps({"token": token.key})
     return HttpResponse(data, content_type='application/json')
+
+@csrf_exempt
+def del_user(self, username):    
+    try:
+        u = User.objects.get(username = username)
+        u.delete()
+        
+        return Response({'message': 'Account has been deleted'}, status=status.HTTP_204_NO_CONTENT)
+
+    except User.DoesNotExist as ex:
+        return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
+
+    except Exception as ex:
+        return Response({'message': ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
