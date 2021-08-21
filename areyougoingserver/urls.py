@@ -5,11 +5,13 @@ from areyougoingapi.views import register_user, login_user
 from areyougoingapi.views import del_user
 from areyougoingapi.views import Events
 from areyougoingapi.views import Profile
+from areyougoingapi.views import Goers
 
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'events', Events, 'event')
 router.register(r'profile', Profile, 'profile')
+router.register(r'goers', Goers, 'goer')
 
 
 
