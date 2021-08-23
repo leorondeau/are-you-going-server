@@ -19,14 +19,20 @@ class Goers(ViewSet):
             goers, many=True, context={'request': request})
         return Response(serializer.data)
 
-class GoerSerializer(serializers.ModelSerializer):
+
+
+class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'username')
+
+class GoerSerializer(serializers.ModelSerializer):
+
+    user = UserSerializer(many=False)
+    
+    class Meta:
         model = Goer
-        url = serializers.HyperlinkedIdentityField(
-            view_name='goer',
-            lookup_field='id'
-        )
         fields = ('id', 'user')
 
 
